@@ -16,7 +16,7 @@ int main()
    system("PAUSE"); 
    return 0; 
 }
-void reverseArrat(int array[], int size) 
+void reverseArray(int array[], int size) 
 {
   int temp; 
   for(int i = 0; i < (size/2); i++)
