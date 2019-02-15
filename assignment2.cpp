@@ -33,7 +33,7 @@ void findRichest(PERSON array[], int num)
 }
 void deposit(string customer, PERSON array[], int num) 
 {
-  float amonut = 0.0; 
+  float amount = 0.0; 
   int wrong = 1; 
   int i; 
   for(i = 0; i < num; i++) 
@@ -42,12 +42,26 @@ void deposit(string customer, PERSON array[], int num)
     if(wrong == 0)
       break; 
   }
-  if(wrong == 0
+  if(wrong == 0)
   {
     cout << customer << ", how much would you like to deposit?" << endl; 
     cin >> amount; 
     array[i].Balance = amount + array[i].Balance; 
     cout << "Now your new balance is " << array[i].Balance << endl; 
+  }
+}
+void newCopy(string file, PERSON array[], int num) 
+{
+	ofstream filename(file.c_str()); 
+	char name[20]; 
+	float balance; 
+	for(int i = 0; i < num; i++) 
+	{
+		strcpy(name, array[i].Name); 
+		balance = array[i].Balance; 
+		filename << name << " " << balance; 
+	}
+	filename.close(); 
 }
 int main()
 {
@@ -59,7 +73,7 @@ int main()
   string customerName; 
   char name[20]; 
   float balance; 
-  istream file("data.txt"); 
+  ifstream file("data.txt"); 
   while(getline(file, line))
     size++; 
   PERSON array[size]; 
@@ -81,6 +95,7 @@ int main()
   cout << "Enter your full name to deposit money: " << endl; 
   getline(cin, customerName); 
   deposit(customerName, array, size); 
+  newCopy("data.txt", array, size); 
   system("PAUSE"); 
   return 0; 
 }
